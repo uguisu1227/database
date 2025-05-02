@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>跳轉訪問</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    #typewriter {
+      font-size: 18px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #111;
+      border: 1px solid #888;
+      color: #fff;
+      width: 300px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      font-size: 16px;
+      background-color: #333;
+      border: 1px solid #888;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .error {
+      color: #f88;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="typewriter"></div>
+
+  <input type="text" id="answer" placeholder="輸入金鑰">
+  <button onclick="checkAnswer()">存取</button>
+  <div class="error" id="error-message"></div>
+
+  <script>
+    // 打字機效果
+    const text = `重新導向。
+重新訪問成功，身分受限。
+載入中。
+載入中。
+載入中。
+載入中。
+存取受阻，將導入存儲訊息：
+
+
+「看來你對我有些好奇。我很榮幸，並且我希望你能持續保有求索之心。保持愉快，保持警惕。」
+「在正式開始對談之前，我們首先得明白，快樂小鎮所有答案的去處都是同一個地方。」
+「你會知道的，我會等你。」`;
+    const target = document.getElementById("typewriter");
+    let i = 0;
+    const speed = 120;
+
+    function typeWriter() {
+      if (i < text.length) {
+        target.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    typeWriter();
+
+    // 密碼驗證
+    function checkAnswer() {
+      const input = document.getElementById("answer").value.trim().toLowerCase();
+      const error = document.getElementById("error-message");
+
+      if (input === "silent") {
+        window.location.href = "profile.html"; // 成功轉向
+      } else {
+        error.textContent = "試錯是探索最重要的環節。";
+      }
+    }
+  </script>
+</body>
+</html>
